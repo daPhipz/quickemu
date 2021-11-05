@@ -793,7 +793,7 @@ function get_kdeneon() {
     URL=$( wget -q -O- https://files.kde.org/neon/images/user/current/neon-user-current.iso.zsync.mirrorlist \
              |  grep '>1.<'|cut -d\" -f 6|sed 's/https/http/' )
 
-    ISO=$(basename "${URL}"
+    ISO=$(basename "${URL}")
    
     zsync_get "${URL}" "${VM_PATH}" "${OS}-${RELEASE}.iso"
     HASH=$(wget -q -O- "https://files.kde.org/neon/images/${RELEASE}/current/neon-${RELEASE}-current.sha256sum" | cut -d' ' -f1)
