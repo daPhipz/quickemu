@@ -794,7 +794,7 @@ function get_kdeneon() {
     MIRROR=$( wget -q -O- https://files.kde.org/neon/images/user/current/neon-user-current.iso.zsync.mirrorlist \
              | grep 'neon-user-current.iso.zsync' 
 
-    ISO=$(basename "${MIRROR}"
+    ISO=$(basename "${MIRROR}")
     URL=$( echo ${MIRROR} | sed 's/https/http/')
     #"neon-${RELEASE}-current.iso"
     #URL="https://files.kde.org/neon/images/${RELEASE}/current/${ISO}"
