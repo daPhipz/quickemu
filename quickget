@@ -798,7 +798,7 @@ function get_kdeneon() {
    
     zsync_get "${URL}" "${VM_PATH}" "${OS}-${RELEASE}.iso"
     HASH=$(wget -q -O- "https://files.kde.org/neon/images/${RELEASE}/current/neon-${RELEASE}-current.sha256sum" | cut -d' ' -f1)
-    check_hash "${ISO}" "${HASH}"
+    check_hash "${OS}-${RELEASE}.iso ${HASH}"
     make_vm_config "${OS}-${RELEASE}.iso"
 }
 
