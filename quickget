@@ -788,15 +788,20 @@ function get_kdeneon() {
     local HASH=""
     local ISO=""
     local URL=""
+    local MIRROR=""
 
     validate_release "releases_kdeneon"
-    
-    ISO="neon-${RELEASE}-current.iso"
-    URL="https://files.kde.org/neon/images/${RELEASE}/current/${ISO}"
-    zsync_get "${URL}" "${VM_PATH}"
+    MIRROR=$( wget -q -O- https://files.kde.org/neon/images/user/current/neon-user-current.iso.zsync.mirrorlist \
+             | grep 'neon-user-current.iso.zsync' 
+
+    ISO=$(basename "${MIRROR}"
+    URL=$( echo ${MIRROR} | sed 's/https/http/')
+    #"neon-${RELEASE}-current.iso"
+    #URL="https://files.kde.org/neon/images/${RELEASE}/current/${ISO}"
+    zsync_get "${URL}" "${VM_PATH}" "${OS}-${RELEASE}.iso"
     HASH=$(wget -q -O- "https://files.kde.org/neon/images/${RELEASE}/current/neon-${RELEASE}-current.sha256sum" | cut -d' ' -f1)
     check_hash "${ISO}" "${HASH}"
-    make_vm_config "${ISO}"
+    make_vm_config "${OS}-${RELEASE}.iso"
 }
 
 function get_linuxmint() {
