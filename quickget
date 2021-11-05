@@ -790,7 +790,7 @@ function get_kdeneon() {
     local URL=""
 
     validate_release "releases_kdeneon"
-    URL=$( wget -q -O- https://files.kde.org/neon/images/user/current/neon-user-current.iso.zsync.mirrorlist \
+    URL=$( wget -q -O- https://files.kde.org/neon/images/${RELEASE}/current/neon-${RELEASE}-current.iso.zsync.mirrorlist \
              |  grep '>1.<'|cut -d\" -f 6|sed 's/https/http/' )
 
     ISO=$(basename "${URL}")
