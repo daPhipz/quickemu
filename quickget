@@ -791,7 +791,8 @@ function get_kdeneon() {
 
     validate_release "releases_kdeneon"
     URL=$( wget -q -O- https://files.kde.org/neon/images/${RELEASE}/current/neon-${RELEASE}-current.iso.zsync.mirrorlist \
-             |  grep '>1.<'|cut -d\" -f 6|sed 's/https/http/' )
+             |  grep '>1.<'|cut -d\" -f 6|sed 's/https/http/' |sed 's/.zsync//')
+
 
     ISO=$(basename "${URL}")
    
@@ -1213,6 +1214,8 @@ else
         releases_fedora
     elif [ "${OS}" == "kali" ]; then
         releases_kali
+    elif [ "${OS}" == "kdeneon" ]; then
+        releases_kdeneon
     elif [[ "${OS}" == *"linuxmint-"* ]]; then
         releases_linuxmint
     elif [[ "${OS}" == *"nixos-"* ]]; then
